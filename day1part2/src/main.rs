@@ -17,6 +17,12 @@ pub fn process(mut state: State, line: &str) -> State {
     };
 
     while offset != 0 {
+        if offset.abs() >= 100 {
+            offset -= 100 * offset.signum();
+            state.score += 1;
+            continue;
+        }
+
         offset -= offset.signum();
         state.angle += offset.signum();
         if state.angle == 100 {
